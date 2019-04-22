@@ -2,23 +2,15 @@ import React from "react";
 import "./style.css";
 
 
-function CastCard(props){
-    return (
-        <div className="card">
-        <div className="img-container">
-          <img alt={props.name} src={props.image} />
-        </div>
-        <div className="content">
-          <ul>
-            <li>
-              <strong>Name:</strong> {props.name}
-            </li>
-          </ul>
-        </div>
+function CastCard(props) {
+  return (
+    <div className="card">
+    <img src={props.image} width="270px" height="240px" id={props.id}
+    onClick={() =>
+    props.clickTracker(props.id)}/>
+    </div>
 
-      </div>
-    )
+  )
 }
-
 
 export default CastCard;

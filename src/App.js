@@ -10,63 +10,112 @@ class App extends Component {
   state = {
     score: 0,
     cast,
-    clickedCast: []
+    clickedCast: [],
+    hscore: 0
   };
 
-  clicked = event => {
-    const currentCast = event.target;
-    // const castClicked = this.state.clickedCast.indexOf(currentCast) > -1;
 
-    const castClicked = this.state.cast.filter(cast => cast.event !== event);
+  // //func to create a shuffle method which will be called inside the shuffle func 
+  // shuffledCast = (arr) => {
+  //   for (var i = arr.length -1; i>0; i--){
+  //     var x = Math.floor(Math.random() * (i +1))
+  //   }
+  //   return arr;
 
-    this.setState({cast});
+  // }
 
-    if (castClicked){
-      this.setState({
-        cast: this.state.cast.sort(function(a,b){
-          return 0.5 - Math.random();
-        }),
-        clickedCast: [],
-        score: 0
-      });
-      alert("You lost. Play again?")
+  // //shuffle func
+  // shuffle = () => {
+
+  //   const shuffledCast = shuffledCast(cast);
+  //   this.setState({
+  //     //sets cast to shuffle
+  //     cast: shuffledCast
+  //   })
+  // }
+
+  // scoreIncrease = () => {
+  //   const newScore = this.state.score + 1;
+  //   this.setState({
+  //     score: newScore
+  //   });
+
+  //   if (newScore >= this.state.hscore) {
+  //     this.setState({
+  //       hscore: newScore
+  //     })
+  //   } else if (newScore === 12) {
+  //     this.resetGame()
+  //   }
+  // }
+
+  // resetGame = () => {
+  //   this.setState({
+  //     score: 0,
+  //     clickedCast: [],
+  //     hscore: 0
+  //   });
+  //   this.shuffle()
+  // }
+
+
+  clickTracker = id => {
+    const clickedCast = this.state.clickedCast(id);
+
+    if (this.state.clickedCast.indexOf(id) === -1) {
+      this.scoreIncrease();
+      this.setState({ clickedCast })
     } else {
-      this.setState({
-        cast: this.state.cast.sort(function(a,b){
-          return 0.5 - Math.random();
-        }),
-        clickedCast: this.state.clicked.concat(currentCast),
-        score: this.state.score + 1
-      },
-      () => {
-        if (this.state.score === 12){
-          alert ("You win");
-          this.setState({
-            cast: this.state.cast.sort(function(a,b){
-              return 0.5 - Math.random()
-            }),
-            clickedCast: [],
-            score: 0
-          })
-        }
-      })
+      this.resetGame()
     }
-  };
 
-  render(){
+
+
+
+    // if (clickedCast.includes(id)){
+    //   this.setState({clickedCast: [], score: 0})
+    //   return;
+    // } else {
+    //   clickedCast.push(id)
+
+    //   if(clickedCast.length === 12){
+    //     this.setState ({score: 12})
+    //     return;
+    //   }
+    //   this.setState({cast, clickedCast, score: clickedCast.length});
+
+    //   for (var i = cast.length -1; i >0; i--){
+    //     var x = Math.floor(Math.random() * (i +1));
+
+    //   }
+    // }
+  
+
+
+
+  render() {
     return (
       <Wrapper>
-      {this.state.cast.map(cast => (
-        <CastCard
-          // id={cast.id}
-          key={cast.id}
-          image={cast.image}
-        />
-      ))}
-    </Wrapper>
+        <Navbar 
+        score={this.state.score} 
+        hscore={this.state.hscore}></Navbar>
+
+        {this.state.cast.map(cast => (
+          <CastCard
+            clickTracker={this.clickTracker}
+            shuffle={this.shuffle}
+            shuffledCast={this.shuffledCast}
+            scoreIncrease={this.scoreIncrease}
+            resetGame={this.resetGame}
+            id={cast.id}
+            key={cast.id}
+            image={cast.image}
+          />
+        ))}
+      </Wrapper>
     )
   }
+  }
 }
-
 
 export default App;
