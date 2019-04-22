@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "image": "meredith.jpg"
+    },
+    {
+        "id": 2,
+        "image": "alex.jpg"
+    },
+    {
+        "id": 3,
+        "image": "derek.jpg"
+    },
+    {
+        "id": 4,
+        "image": "bailey.jpg"
+    },
+    {
+        "id": 5,
+        "image": "richard.jpg"
+    },
+    {
+        "id": 6,
+        "image": "sloan.jpg"
+    },
+    {
+        "id": 7,
+        "image": "george.jpg"
+    },
+    {
+        "id": 8,
+        "image": "christina.jpg"
+    },
+    {
+        "id": 9,
+        "image": "teddy.jpg"
+    },
+    {
+        "id": 10,
+        "image": "owen.jpg"
+    },
+    {
+        "id": 11,
+        "image": "jackson.jpg"
+    },
+    {
+        "id": 12,
+        "image": "amelia.jpg"
+    }
+]
