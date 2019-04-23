@@ -10,87 +10,52 @@ class App extends Component {
   state = {
     score: 0,
     cast,
-    clickedCast: [],
-    hscore: 0
+    hscore: 0,
+    message: ""
   };
 
+  shuffleCards = () =>{
+    this.state.cast.sort(()=>Math.random() - 0.5)
+  }
 
-  // //func to create a shuffle method which will be called inside the shuffle func 
-  // shuffledCast = (arr) => {
-  //   for (var i = arr.length -1; i>0; i--){
-  //     var x = Math.floor(Math.random() * (i +1))
-  //   }
-  //   return arr;
+  youWin = () => {
+    if (this.state.score === 12){
+      this.setState({message: "you win!"})
+    }
+  }
 
-  // }
 
-  // //shuffle func
-  // shuffle = () => {
 
-  //   const shuffledCast = shuffledCast(cast);
-  //   this.setState({
-  //     //sets cast to shuffle
-  //     cast: shuffledCast
-  //   })
-  // }
-
-  // scoreIncrease = () => {
-  //   const newScore = this.state.score + 1;
-  //   this.setState({
-  //     score: newScore
-  //   });
-
-  //   if (newScore >= this.state.hscore) {
-  //     this.setState({
-  //       hscore: newScore
-  //     })
-  //   } else if (newScore === 12) {
-  //     this.resetGame()
-  //   }
-  // }
-
-  // resetGame = () => {
-  //   this.setState({
-  //     score: 0,
-  //     clickedCast: [],
-  //     hscore: 0
-  //   });
-  //   this.shuffle()
-  // }
+  resetGame=() => {
+    if (this.state.score > this.state.hscore){
+      this.setState({hscore: this.state.score});
+      this.youWin()
+    }
+    this.state.cast.forEach(cast => {
+      cast.count = 0;
+    });
+    this.setState({score: 0});
+    return true;
+  }
 
 
   clickTracker = id => {
-    const clickedCast = this.state.clickedCast(id);
-
-    if (this.state.clickedCast.indexOf(id) === -1) {
-      this.scoreIncrease();
-      this.setState({ clickedCast })
-    } else {
-      this.resetGame()
-    }
-
-
-
-
-    // if (clickedCast.includes(id)){
-    //   this.setState({clickedCast: [], score: 0})
-    //   return;
-    // } else {
-    //   clickedCast.push(id)
-
-    //   if(clickedCast.length === 12){
-    //     this.setState ({score: 12})
-    //     return;
-    //   }
-    //   this.setState({cast, clickedCast, score: clickedCast.length});
-
-    //   for (var i = cast.length -1; i >0; i--){
-    //     var x = Math.floor(Math.random() * (i +1));
-
-    //   }
-    // }
-  
-
+    this.state.cast.find((element, i) => {
+      if (element.id === id) {
+        if(cast[i].count === 0){
+          cast[i].count = cast[i].count + 1;
+          this.setState({score : this.state.score + 1}, function(){
+            console.log(this.state.score);
+          });
+          this.shuffleCards()
+          return true; 
+        } else {
+          this.setState({message: "you lose"})
+          this.resetGame();
+        }
+      }
+    });
+  }
 
 
   render() {
@@ -98,15 +63,14 @@ class App extends Component {
       <Wrapper>
         <Navbar 
         score={this.state.score} 
+        message={this.state.message}
         hscore={this.state.hscore}></Navbar>
 
         {this.state.cast.map(cast => (
           <CastCard
             clickTracker={this.clickTracker}
             shuffle={this.shuffle}
-            shuffledCast={this.shuffledCast}
-            scoreIncrease={this.scoreIncrease}
-            resetGame={this.resetGame}
+            // resetGame={this.resetGame}
             id={cast.id}
             key={cast.id}
             image={cast.image}
@@ -115,7 +79,7 @@ class App extends Component {
       </Wrapper>
     )
   }
-  }
+  
 }
 
 export default App;
