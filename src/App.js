@@ -31,8 +31,8 @@ class App extends Component {
       this.setState({hscore: this.state.score});
       this.youWin()
     }
-    this.state.cast.forEach(cast => {
-      cast.count = 0;
+    this.state.cast.forEach(element => {
+      element.count = 0;
     });
     this.setState({score: 0});
     return true;
