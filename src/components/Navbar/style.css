@@ -1,16 +1,27 @@
 .navbar {
-  background: rgb(0, 0, 0);
-  color: white;
+  /* background: rgb(0, 0, 0); */
+  color: black;
+  border-style: dashed;
+  border-color: black;
   width: 100%;
   font-size: 22px;
   height: 100%;
   margin-bottom: 15px;
-  text-align: center;
+  padding: 10px;
   font-family: 'Open Sans Condensed', sans-serif;
 }
 
 .title {
   font-size: 30px;
+  float: left
+}
+
+.message {
+  text-align: center
+}
+
+.score {
+  float: right
 }
 
 

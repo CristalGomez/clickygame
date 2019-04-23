@@ -6,9 +6,10 @@ class Navbar extends Component {
     return (
 
       <nav className="navbar">
-      <p className="title"> Greys Anatomy Memory Game</p>
-      <p className="score">Score: {this.props.score} Highscore: {this.props.hscore}
-      {this.props.message}</p>
+
+      <p className="title"> Grey's Anatomy Memory Game</p>
+      <p className="score">Score: {this.props.score} Highscore: {this.props.hscore}</p>
+      <p className="message">{this.props.message}</p>
       </nav>
 
     );
