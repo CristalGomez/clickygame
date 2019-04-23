@@ -39,14 +39,44 @@ class App extends Component {
   }
 
 
+  // clickTracker = id => {
+  //   this.state.cast.find((element, i) => {
+  //     if (element.id === id){
+  //       this.setState({message: "you lose"});
+  //       this.resetGame()
+  //     } else if (cast[i].count === 0){
+  //       cast[i].count = cast[i].count +1;
+  //       this.setState({score: this.state.score + 1}, () => {
+  //         // console.log(this.state.score)
+  //       });
+  //       this.shuffleCards();
+  //       return true;
+  //     }
+  //   })
+  // }
+
   clickTracker = id => {
+    //id is the id from cast.json
+    console.log(id)
     this.state.cast.find((element, i) => {
+      console.log(i)
+      //id: index of image clicked
+      //element: img id, img href, count: 0 (if clicked twice, count goes up by 1 & then resets to 0)
       if (element.id === id) {
+        //if element's id matches id clicked
+        console.log(element)
+      //if cast @ index of i (whatever chosen) 
+      //count: returns the total # of components in children, equal to the # of times that a cb passed to a map/forEa would be invoked
         if(cast[i].count === 0){
+          //cast: from cast.json
+          console.log(cast)
+          //incrementing by one when clicked
           cast[i].count = cast[i].count + 1;
-          this.setState({score : this.state.score + 1}, function(){
-            console.log(this.state.score);
+          //updated score
+          this.setState({score : this.state.score + 1},()=>{
+            // console.log(this.state.score);
           });
+          //calling shuffledcards func
           this.shuffleCards()
           return true; 
         } else {
