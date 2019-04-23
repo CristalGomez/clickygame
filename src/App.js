@@ -73,14 +73,12 @@ class App extends Component {
           //incrementing by one when clicked
           cast[i].count = cast[i].count + 1;
           //updated score
-          this.setState({score : this.state.score + 1},()=>{
-            // console.log(this.state.score);
-          });
+          this.setState({score : this.state.score + 1})
           //calling shuffledcards func
           this.shuffleCards()
           return true; 
         } else {
-          this.setState({message: "you lose"})
+          // this.setState({message: "you lose"})
           this.resetGame();
         }
       }
